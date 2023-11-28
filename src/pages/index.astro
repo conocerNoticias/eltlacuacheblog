@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import NavOption from "../components/NavOption.astro";
+import Footer from "../components/Footer.astro";
+import Menu from "../components/blog/Menu.astro";
+import Title from "../components/blog/Title.astro";
+import Posts from "../components/blog/Posts.astro";
+import Card from "../components/blog/Card.astro";
+import Jumbotron from "../components/Jumbotron.astro";
+
+const imagen = "/eltlacuache.jpg",
+  link = "https://www.facebook.com/TlacuacheNoticias?mibextid=JRoKGi",
+  nombre = "El Tlacuache";
+const articulos = await Astro.glob("./posts/*.md");
+articulos.reverse();
+---
+
+<Layout>
+  <Navbar imagen={imagen} link={"/"} nombre={nombre}>
+    <NavOption link={"/"} nombre={"Inicio"} />
+    <NavOption link={"/galeria"} nombre={"Galeria"} />
+  </Navbar>
+  <Menu>
+    <Title>
+      <Jumbotron
+        titulo="El Tlacuache"
+        descripcion="Sitio web de noticias y medios de comunicación"
+        link="https://www.facebook.com/TlacuacheNoticias?mibextid=JRoKGi"
+        imagen="bg-[url('/352411094_1317815712278691_8596217776478060535_n.png')]"
+      />
+    </Title>
+    <Posts>
+      {
+        articulos.map((x) => (
+          <Card
+            etiqueta={x.frontmatter.etiqueta}
+            titulo={x.frontmatter.titulo}
+            descripcion={x.frontmatter.descripcion}
+            link={x.frontmatter.redireccion}
+          />
+        ))
+      }
+    </Posts>
+  </Menu>
+
+  <Footer link={link} nombre={nombre} />
+</Layout>

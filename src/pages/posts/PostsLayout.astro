@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import NavOption from "../../components/NavOption.astro";
+import Footer from "../../components/Footer.astro";
+import Menu from "../../components/blog/Menu.astro";
+
+const img = "/eltlacuache.jpg",
+url = "https://www.facebook.com/TlacuacheNoticias?mibextid=JRoKGi",
+nombre = "El Tlacuache";
+
+const { frontmatter } = Astro.props;
+
+const { titulo, imagen, descripcion, link } = frontmatter;
+---
+
+<Layout>
+  <Navbar imagen={img} link={"/"} nombre={nombre}>
+    <NavOption link={"/"} nombre={"Inicio"} />
+    <NavOption link={"/galeria"} nombre={"Galeria"} />
+  </Navbar>
+  <Menu>
+    <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+      <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+        <article
+          class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+          <header class="mb-4 lg:mb-6 not-format">
+            <h1
+              class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+              {titulo}</h1>
+          </header>
+          <figure class="mb-4">
+            <img src={imagen} class="mx-auto w-full lg:max-w-xl h-full w-full rounded-lg shadow-x" alt="">
+          </figure>
+          <p class="lead">{descripcion}</p>
+          
+          <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 mt-4">
+            <a href={link} target="_blank"
+              class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+              Ver en facebook
+              <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9"></path>
+              </svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+  </Menu>
+  <Footer link={url} nombre={nombre} />
+</Layout>
